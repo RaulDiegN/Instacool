@@ -1,17 +1,31 @@
+import './index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { Router } from 'react-router'
 import createHistory from 'history/createBrowserHistory'
+import { Provider } from 'react-redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form'
+
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import * as reducers from './ducks'
+import services from './services'
 
 const history = createHistory()
+const store = createStore(combineReducers({
+  ...reducers,
+  form: formReducer,
+}), applyMiddleware(thunk.withExtraArgument(services)))
 
 ReactDOM.render(
-  <Router history={history}>
-    <App />
-  </Router>,  
+  <Provider store={store}>
+    <Router history={history}>
+      <App history={history}/>
+    </Router>
+  </Provider>,  
   document.getElementById('root')
 );
 
