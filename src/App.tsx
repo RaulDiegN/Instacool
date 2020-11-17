@@ -9,6 +9,7 @@ import Register from './Containers/Auth/Register'
 import NewsFeed from './Containers/NewsFeed'
 import Profile from './Containers/Profile'
 import services from './services'
+import UploadPost from "./containers/Profile/UploadPost";
 
 interface IAppProps{
   history: History
@@ -48,6 +49,7 @@ class App extends Component<IAppProps> {
        <Route path='/app' component={NavBar}/>
        <Route exact={true}  path='/app/newsfeed' component={NewsFeed}/>
        <Route exact={true}  path='/app/profile' component={Profile}/>
+       <Route exact={true} path="/app/upload" component={UploadPost} />
      </div>
     );
   }
